@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Todo } from "./Todo";
 import Button from '@mui/material/Button';
-import TextField  from '@mui/material/TextField';
-
+import TextField from '@mui/material/TextField';
 import { CreateTodoModal } from "./CreateTodoModal";
 import toast from 'react-hot-toast';
 
@@ -15,16 +14,19 @@ export function Dashboard() {
     const [search, setSearch] = useState("");
 
     async function getTodos() {
-        const r = await fetch("http://3.109.211.104:8001/todos");
-        const j = await r.json();
-        setTodoList(j);
-        console.log(j);
+        try {
+            const response = await fetch("http://3.109.211.104:8001/todos");
+            const data = await response.json();
+            setTodoList(data);
+        } catch (error) {
+            console.error("Failed to fetch todos", error);
+        }
     }
 
     useEffect(() => {
-        if(!username) navigate("/login");
+        if (!username) navigate("/login");
         getTodos();
-    }, [])
+    }, []);
 
     function logoutClick() {
         localStorage.removeItem("username");
@@ -32,31 +34,21 @@ export function Dashboard() {
         navigate("/login");
     }
 
-    return <>
-        <div style={{ display:"flex", alignItems: "center", justifyContent:"center", width: "100%" }}>
-            <div style={{ width: "500px"}}>
-                <div style={{display: 'flex', justifyContent: "space-between", alignItems:"center"}}>
+    return (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}>
+            <div style={{ width: "500px" }}>
+                <div style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
                     <h1>Welcome, {username}!</h1>
-                    <div>
                     <Button variant="outlined" size="large" color="error" onClick={logoutClick}>Logout</Button>
-                    </div>
                 </div>
-                <div style={{ padding: "10px"}}>
-                    <TextField fullWidth placeholder="Search" value={search} onChange={e => setSearch(e.target.value)}/>
-                </div>
+                <TextField fullWidth placeholder="Search" value={search} onChange={e => setSearch(e.target.value)} />
                 <div>
-                    {
-                        todolist.map((value, index) => {
-                            if(value.title.toLowerCase().includes(search.toLowerCase()))
-                            return <Todo title={value.title} priority={value.priority} is_completed={value.is_completed} id={value.id} updateTodos={getTodos}/>
-                            return <></>
-                        })
-                    }
+                    {todolist.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase())).map(todo => (
+                        <Todo key={todo.id} {...todo} updateTodos={getTodos} />
+                    ))}
                 </div>
-                <br/>
-                <br/>
                 <CreateTodoModal updateTodos={getTodos} />
             </div>
         </div>
-    </>
+    );
 }
