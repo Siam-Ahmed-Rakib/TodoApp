@@ -28,7 +28,7 @@ export function CreateTodoModal({ updateTodos }) {
             "deadline": "2025-01-29T16:34:37.131Z",
             "priority": parseInt(priority)
         };
-        const r = await fetch("http://localhost:8000/todo", {
+        const r = await fetch("http://3.109.211.104:8001/todo", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

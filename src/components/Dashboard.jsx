@@ -15,7 +15,7 @@ export function Dashboard() {
     const [search, setSearch] = useState("");
 
     async function getTodos() {
-        const r = await fetch("http://localhost:8000/todos");
+        const r = await fetch("http://3.109.211.104:8001/todos");
         const j = await r.json();
         setTodoList(j);
         console.log(j);

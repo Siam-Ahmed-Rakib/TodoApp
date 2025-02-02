@@ -15,7 +15,7 @@ function Login() {
             "username": username, 
             "password": pass
         }  
-        const r = await fetch("http://localhost:8000/login", {
+        const r = await fetch("http://3.109.211.104:8001/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
