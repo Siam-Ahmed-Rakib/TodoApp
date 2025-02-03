@@ -37,7 +37,7 @@ export function Profile() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://3.109.211.104:8001/profile/${username}`,
+          `https://5nvfy5p7we.execute-api.ap-south-1.amazonaws.com/dev/profile/${username}`,
           {
             headers: { Accept: "application/json" },
           }
@@ -103,7 +103,7 @@ export function Profile() {
       }
 
       const response = await fetch(
-        `http://3.109.211.104:8001/profile/${username}`,
+        `https://5nvfy5p7we.execute-api.ap-south-1.amazonaws.com/dev/profile/${username}`,
         {
           method: "PUT",
           headers: {

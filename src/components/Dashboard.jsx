@@ -44,7 +44,7 @@ export function Dashboard() {
 
     async function getTodos() {
         try {
-            const response = await fetch("http://3.109.211.104:8001/todos");
+            const response = await fetch("https://5nvfy5p7we.execute-api.ap-south-1.amazonaws.com/dev/todos");
             const data = await response.json();
             setTodoList(data);
         } catch (error) {

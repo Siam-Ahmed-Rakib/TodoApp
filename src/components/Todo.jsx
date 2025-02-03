@@ -48,7 +48,7 @@ export function Todo({ title, description, deadline, priority, is_completed, id,
   async function completeTodo() {
     try {
       const formattedDeadline = new Date(deadline).toISOString();
-      const response = await fetch(`http://3.109.211.104:8001/todo/${id}`, {
+      const response = await fetch(`https://5nvfy5p7we.execute-api.ap-south-1.amazonaws.com/dev/todo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export function Todo({ title, description, deadline, priority, is_completed, id,
 
   async function deleteTodo() {
     try {
-      const response = await fetch(`http://3.109.211.104:8001/todo/${id}`, {
+      const response = await fetch(`https://5nvfy5p7we.execute-api.ap-south-1.amazonaws.com/dev/todo/${id}`, {
         method: "DELETE",
         headers: {
           "accept": "application/json",
