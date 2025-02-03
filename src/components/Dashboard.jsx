@@ -18,21 +18,28 @@ const StyledBox = styled(Box)(({ theme }) => ({
     justifyContent: 'center',
     width: '100%',
     padding: theme.spacing(3),
-    background: 'linear-gradient(135deg,rgb(127, 219, 236), #fad0c4)',
+    background: 'linear-gradient(135deg, #89f7fe, #66a6ff)',
     minHeight: '100vh',
 }));
 
 const ContentBox = styled(Box)(({ theme }) => ({
     width: '100%',
-    maxWidth: '800px',
+    maxWidth: '900px',
     padding: theme.spacing(4),
-    boxShadow: 5,
-    borderRadius: 3,
+    boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.2)',
+    borderRadius: 8,
     backgroundColor: 'white',
     [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(2),
     },
 }));
+
+const ButtonContainer = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '10px',
+});
 
 export function Dashboard() {
     const navigate = useNavigate();
@@ -89,13 +96,13 @@ export function Dashboard() {
     return (
         <StyledBox>
             <ContentBox>
-                <Box display='flex' justifyContent="space-between" alignItems="center" mb={3}>
+                <Box display='flex' justifyContent="space-between" alignItems="center" mb={3} flexWrap="wrap">
                     <h1 style={{ fontSize: "24px", margin: 0 }}>Welcome, {username}!</h1>
-                    <Box>
-                        <Button variant="outlined" size="medium" color="primary" onClick={goToProfile}>Profile</Button>
-                        <Button variant="outlined" size="medium" color="error" onClick={logoutClick} style={{ marginLeft: "10px" }}>Logout</Button>
-                        <Button variant="outlined" size="medium" color="secondary" onClick={goToStatistics} style={{ marginLeft: "10px" }}>Statistics</Button>
-                    </Box>
+                    <ButtonContainer>
+                        <Button variant="contained" color="primary" onClick={goToProfile}>Profile</Button>
+                        <Button variant="contained" color="error" onClick={logoutClick}>Logout</Button>
+                        <Button variant="contained" color="secondary" onClick={goToStatistics}>Statistics</Button>
+                    </ButtonContainer>
                 </Box>
 
                 <TextField 
