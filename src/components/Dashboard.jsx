@@ -41,6 +41,14 @@ export function Dashboard() {
         navigate("/login");
     }
 
+    function goToProfile() {
+        navigate("/profile");
+    }
+
+    function goToStatistics() {
+        navigate("/statistics");
+    }
+
     const filteredTodos = todolist.filter(todo => 
         todo.title.toLowerCase().includes(search.toLowerCase()) && 
         (priorityFilter === "" || 
@@ -57,14 +65,26 @@ export function Dashboard() {
     });
 
     return (
-        <Box display="flex" alignItems="center" justifyContent="center" width="100%" p={3}>
-            <Box width={{ xs: "100%", sm: "500px" }} p={2} boxShadow={3} borderRadius={2} bgcolor="white">
-                <Box display='flex' justifyContent="space-between" alignItems="center" mb={2}>
-                    <h1>Welcome, {username}!</h1>
-                    <Button variant="outlined" size="large" color="error" onClick={logoutClick}>Logout</Button>
+        <Box display="flex" alignItems="center" justifyContent="center" width="100%" p={3} bgcolor="#f5f5f5">
+            <Box width={{ xs: "100%", sm: "600px" }} p={4} boxShadow={5} borderRadius={3} bgcolor="white">
+                <Box display='flex' justifyContent="space-between" alignItems="center" mb={3}>
+                    <h1 style={{ fontSize: "24px", margin: 0 }}>Welcome, {username}!</h1>
+                    <Box>
+                        <Button variant="outlined" size="medium" color="primary" onClick={goToProfile}>Profile</Button>
+                        <Button variant="outlined" size="medium" color="error" onClick={logoutClick} style={{ marginLeft: "10px" }}>Logout</Button>
+                        <Button variant="outlined" size="medium" color="secondary" onClick={goToStatistics} style={{ marginLeft: "10px" }}>Statistics</Button>
+                    </Box>
                 </Box>
-                <TextField fullWidth placeholder="Search" value={search} onChange={e => setSearch(e.target.value)} variant="outlined" margin="dense" />
-                
+
+                <TextField 
+                    fullWidth 
+                    placeholder="Search Todos" 
+                    value={search} 
+                    onChange={e => setSearch(e.target.value)} 
+                    variant="outlined" 
+                    margin="dense"
+                />
+
                 <FormControl fullWidth margin="dense" variant="outlined">
                     <InputLabel>Filter by Priority</InputLabel>
                     <Select value={priorityFilter} onChange={e => setPriorityFilter(e.target.value)} label="Filter by Priority">
@@ -85,11 +105,16 @@ export function Dashboard() {
                     </Select>
                 </FormControl>
 
-                <Box mt={2}>
-                    {sortedTodos.map(todo => (
-                        <Todo key={todo.id} {...todo} updateTodos={getTodos} />
-                    ))}
+                <Box mt={3}>
+                    {sortedTodos.length > 0 ? (
+                        sortedTodos.map(todo => (
+                            <Todo key={todo.id} {...todo} updateTodos={getTodos} />
+                        ))
+                    ) : (
+                        <p style={{ textAlign: "center", color: "#666" }}>No todos found.</p>
+                    )}
                 </Box>
+
                 <CreateTodoModal updateTodos={getTodos} />
             </Box>
         </Box>
