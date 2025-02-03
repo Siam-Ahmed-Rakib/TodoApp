@@ -18,7 +18,7 @@ export function Profile() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [refresh, setRefresh] = useState(false); // NEW STATE TO FORCE RE-RENDER
+  const [refresh, setRefresh] = useState(false); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -57,12 +57,12 @@ export function Profile() {
     }
 
     fetchProfile();
-  }, [username, navigate, refresh]); // REFETCH WHEN refresh CHANGES
+  }, [username, navigate, refresh]);
 
   function handleChange(e) {
     const { name, value } = e.target;
 
-    if (name === "phone" && !/^\d{0,11}$/.test(value)) return; // Allow only up to 11 digits
+    if (name === "phone" && !/^\d{0,11}$/.test(value)) return; 
 
     setFormData({ ...formData, [name]: value });
   }
@@ -71,13 +71,11 @@ export function Profile() {
     try {
       let updatedData = { ...formData };
 
-      // Validate phone number (exactly 11 digits)
       if (!/^\d{11}$/.test(updatedData.phone)) {
         toast.error("Phone number must be exactly 11 digits.");
         return;
       }
 
-      // If an image is selected, upload it
       if (image) {
         const imageData = new FormData();
         imageData.append("image", image);
@@ -104,7 +102,6 @@ export function Profile() {
         updatedData.profile_picture = uploadData.data.url;
       }
 
-      // Send the updated profile data
       const response = await fetch(
         `http://3.109.211.104:8001/profile/${username}`,
         {
@@ -120,7 +117,7 @@ export function Profile() {
       if (response.ok) {
         toast.success("Profile updated successfully!");
         setOpen(false);
-        setRefresh((prev) => !prev); // TRIGGER RE-RENDER BY TOGGLING refresh
+        setRefresh((prev) => !prev);
       } else {
         toast.error("Failed to update profile. Please try again.");
       }
@@ -165,7 +162,7 @@ export function Profile() {
       bgcolor="#f5f5f5"
       p={2}
     >
-      <Card sx={{ width: 400, p: 3, boxShadow: 3, borderRadius: 3 }}>
+      <Card sx={{ width: { xs: '90%', sm: 400 }, p: 3, boxShadow: 3, borderRadius: 3 }}>
         <CardContent>
           <Box display="flex" alignItems="center" flexDirection="column">
             <Avatar

@@ -9,7 +9,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "400px",
+  width: '90%', // Make modal responsive
+  maxWidth: '500px', // Limit max width
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: 2,

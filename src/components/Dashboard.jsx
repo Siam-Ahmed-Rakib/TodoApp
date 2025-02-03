@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Todo } from "./Todo";
 import Button from '@mui/material/Button';
@@ -10,11 +10,33 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+
+const StyledBox = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    padding: theme.spacing(3),
+    background: 'linear-gradient(135deg,rgb(127, 219, 236), #fad0c4)',
+    minHeight: '100vh',
+}));
+
+const ContentBox = styled(Box)(({ theme }) => ({
+    width: '100%',
+    maxWidth: '800px',
+    padding: theme.spacing(4),
+    boxShadow: 5,
+    borderRadius: 3,
+    backgroundColor: 'white',
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2),
+    },
+}));
 
 export function Dashboard() {
     const navigate = useNavigate();
     const username = localStorage.getItem("username");
-
     const [todolist, setTodoList] = useState([]);
     const [search, setSearch] = useState("");
     const [priorityFilter, setPriorityFilter] = useState("");
@@ -65,8 +87,8 @@ export function Dashboard() {
     });
 
     return (
-        <Box display="flex" alignItems="center" justifyContent="center" width="100%" p={3} bgcolor="#f5f5f5">
-            <Box width={{ xs: "100%", sm: "600px" }} p={4} boxShadow={5} borderRadius={3} bgcolor="white">
+        <StyledBox>
+            <ContentBox>
                 <Box display='flex' justifyContent="space-between" alignItems="center" mb={3}>
                     <h1 style={{ fontSize: "24px", margin: 0 }}>Welcome, {username}!</h1>
                     <Box>
@@ -116,7 +138,7 @@ export function Dashboard() {
                 </Box>
 
                 <CreateTodoModal updateTodos={getTodos} />
-            </Box>
-        </Box>
+            </ContentBox>
+        </StyledBox>
     );
 }

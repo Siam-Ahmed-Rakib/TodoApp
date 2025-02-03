@@ -2,6 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+const Container = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  height: "100vh",
+  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+  color: "#fff",
+  padding: theme.spacing(3),
+}));
+
+const ChartContainer = styled(Box)(({ theme }) => ({
+  width: "100%",
+  maxWidth: "400px",
+  background: "#fff",
+  padding: theme.spacing(3),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[5],
+  marginTop: theme.spacing(2),
+}));
 
 const TaskStatistics = () => {
   const [tasks, setTasks] = useState([]);
@@ -32,8 +55,8 @@ const TaskStatistics = () => {
     fetchTasks();
   }, []);
 
-  if (loading) return <div className="loading">Loading tasks...</div>;
-  if (error) return <div className="error">Error fetching tasks: {error}</div>;
+  if (loading) return <Container><CircularProgress color="inherit" /></Container>;
+  if (error) return <Container><Typography variant="h6">Error: {error}</Typography></Container>;
 
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.is_completed).length;
@@ -62,39 +85,33 @@ const TaskStatistics = () => {
           },
         },
       },
-      tooltip: {
-        backgroundColor: "#333",
-        titleColor: "#fff",
-        bodyColor: "#fff",
-      },
     },
+    responsive: true,
+    maintainAspectRatio: false,
   };
 
   return (
-    <div className="task-statistics" style={{ textAlign: "center", margin: "20px" }}>
-      <h2 style={{ fontSize: "24px", marginBottom: "10px" }}>Task Statistics</h2>
-      <p style={{ fontSize: "18px" }}>Total Tasks: <b>{totalTasks}</b></p>
-      <p style={{ fontSize: "18px" }}>Completed Tasks: <b>{completedTasks}</b></p>
-      <p style={{ fontSize: "18px" }}>Efficiency: <b>{efficiency}%</b></p>
-      <div style={{ width: "50%", margin: "0 auto" }}>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Task Statistics
+      </Typography>
+      <Typography variant="h6">Total Tasks: <b>{totalTasks}</b></Typography>
+      <Typography variant="h6">Completed Tasks: <b>{completedTasks}</b></Typography>
+      <Typography variant="h6">Efficiency: <b>{efficiency}%</b></Typography>
+      
+      <ChartContainer>
         <Pie data={data} options={options} />
-      </div>
-      <button 
-        onClick={() => navigate(-1)} 
-        style={{ 
-          marginTop: "20px", 
-          padding: "10px 20px", 
-          fontSize: "16px", 
-          backgroundColor: "#007bff", 
-          color: "#fff", 
-          border: "none", 
-          borderRadius: "5px", 
-          cursor: "pointer" 
-        }}
+      </ChartContainer>
+      
+      <Button 
+        variant="contained" 
+        color="secondary" 
+        onClick={() => navigate(-1)}
+        sx={{ marginTop: 2 }}
       >
         Back
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 
