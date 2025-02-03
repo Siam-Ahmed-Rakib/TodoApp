@@ -1,30 +1,48 @@
+
 # Todo App
 
-This is a frontend application developed using React as part of the ACS Carrier Bootcamp. The backend API was provided as part of the bootcamp. 
+This project is a simple todo application created as part of the ACS Carrier Bootcamp.
 
-## Installation
+## Description
 
-You can download the application from the following GitHub repository: [TodoApp](https://github.com/Siam-Ahmed-Rakib/TodoApp).
+The todo app allows the user to manage their tasks efficiently. Users can add, update, and delete tasks, as well as mark tasks as completed.
 
-Alternatively, you can access the deployed version of the application at this link: [TodoApp on Netlify](https://starlit-pavlova-55d077.netlify.app/).
+## Demo
 
-### Download as ZIP
+You can view a live demo of the application [here](https://starlit-pavlova-55d077.netlify.app/).
 
-To download the repository as a ZIP file:
-1. Go to the [TodoApp GitHub repository](https://github.com/Siam-Ahmed-Rakib/TodoApp).
-2. Click on the "Code" button.
-3. Select "Download ZIP."
+## How to Access
+
+Clone the repository:
+```
+git clone https://github.com/Siam-Ahmed-Rakib/TodoApp.git
+```
+
+Navigate into the project directory:
+```
+cd TodoApp
+```
+
+Install the dependencies:
+```
+npm install
+```
+
+Start the development server:
+```
+npm run dev
+```
+
+Open your browser and go to `http://localhost:3000` to see the application running.
 
 ## Features
 
-- Update Todo: Mark todos as completed instantly.
-- Countdown: Display a countdown for each todo's deadline.
-- Filtering: Filter todos based on priority.
-- Sorting: Sort todos by creation time, deadline, and priority.
-- Profile: Navigate to a profile page to view and edit user information.
-- Show Statistics: Display total tasks, completed tasks, and efficiency with a pie chart.
-- Enhance the UI: Improved landing page, icons, input validation, responsiveness, and overall look and feel.
+- **Update Todo**: Mark todos as completed instantly.
+- **Countdown**: Display a countdown for each todo's deadline.
+- **Filtering**: Filter todos based on priority.
+- **Sorting**: Sort todos by creation time, deadline, and priority.
+- **Profile**: Navigate to a profile page to view and edit user information.
+- **Show Statistics**: Display total tasks, completed tasks, and efficiency with a pie chart.
+- **Enhance the UI**: Improved landing page, icons, input validation, responsiveness, and overall look and feel.
 
 Please note that when creating an account, you must provide an email and phone number that are already in use.
-
----
